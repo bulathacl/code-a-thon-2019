@@ -1,0 +1,17 @@
+.navbar-brand {
+    cursor: pointer;
+}
+
+.navbar-nav {
+    .nav-item {
+        .nav-link {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            .dropdown-item {
+                cursor: pointer;
+            }
+        }
+    }
+}

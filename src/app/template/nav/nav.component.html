@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" (click)="logoClicked()">{{ systemSettings.appName }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item dropdown" *ngFor="let item of navbarItems">
+        <a class="nav-link" *ngIf="!item.items && !item.component" href="{{ item.href }}">{{ item.name }}</a>
+        <a class="nav-link" *ngIf="!item.items && item.component" (click)="openModal(item.component, item.data)">{{ item.name }}</a>
+        <a class="nav-link dropdown-toggle" *ngIf="item.items" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ item.name }}
+        </a>
+        <div class="dropdown-menu" *ngIf="item.items && !item.component" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" *ngFor="let subitem of item.items">{{ subitem.name }}</a>
+        </div>
+        <div class="dropdown-menu" *ngIf="item.items && item.component" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" *ngFor="let subitem of item.items" (click)="openModal(item.component, subitem.data)">{{ subitem.name }}</a>
+        </div>
+      </li>
+    </ul>    
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+    </form>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link" (click)="loginClicked()">Login</a>        
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<app-popup-modal #popupModal></app-popup-modal>

@@ -1,0 +1,47 @@
+.home-nav{
+    border-bottom: 1px solid #ddd;
+    label{
+        font-family: 'Open Sans', sans-serif;
+        font-size: 19px;
+        background: none!important;
+        color: #555!important;
+    }
+    a:link {
+        text-decoration: none;
+    }
+    div:hover{
+        border-bottom: 4px solid #E16B5B     
+    }
+    div{
+        padding: 15px 44px;
+    }
+
+    .active-tab {
+        border-bottom: 4px solid #E16B5B ;
+    }
+
+    
+}
+
+.category-filter {
+    height: 65px;
+    line-height: 65px;
+}
+
+.category-filter{
+    text-align: center; 
+  }
+  
+ .category-filter :hover {
+    padding: 10px;
+      background-color: #dae8f5;
+      border: 1px solid rgb(139, 139, 206);
+      border-radius: 8px;
+  }
+
+  .active {
+    padding: 10px;
+      background-color: #dae8f5;
+      border: 1px solid rgb(139, 139, 206);
+      border-radius: 8px;
+  }

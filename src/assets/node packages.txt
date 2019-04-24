@@ -1,0 +1,8 @@
+npm install --save angular2-moment  - to be removed
+
+Compress/ Resize images before upload - to be removed
+npm install ng2-img-max blueimp-canvas-to-blob --save
+https://alligator.io/angular/resizing-images-in-browser-ng2-img-max/
+
+tinyMCE to edit the item description
+npm install @tinymce/tinymce-angular

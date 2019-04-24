@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, html {
+    height: 100%;
+    margin: 0 auto;
+}
+
+body {
+    font-family: 'Montserrat';
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1.3em;
+    display: grid;
+    grid-template-columns: 30% auto;
+
+    a {
+        color: white;
+    }
+}
+
+section {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.btn-primary {
+    background-color: cadetblue !important;
+    border-color: white !important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.prominent-3{
+    color: lightgrey;
+}
+
+.prominent-2{
+    color:#5d5b5b;
+}
+
+.launch-label{
+    color: #007bff;
+    cursor: pointer;
+}
+
+.current-bid {
+    color: orangered;
+    font-size: 19px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
