@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@ngx-pwa/local-storage": "^7.4.2",
     "@tinymce/tinymce-angular": "^2.3.2",
     "angular2-moment": "^1.9.0",
     "blueimp-canvas-to-blob": "^3.14.0",

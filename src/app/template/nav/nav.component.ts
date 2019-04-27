@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SystemSettings } from '../../common/system-settings';
-import { PopupModalComponent } from '../../common/popup-modal/popup-modal.component';
 import { TestComponentComponent } from '../../components/test-component/test-component.component';
 
 @Component({
