@@ -1,17 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SystemSettings } from '../../common/system-settings';
 import { TestComponentComponent } from '../../components/test-component/test-component.component';
+import { RxjsService } from '../../services/rxjs-service/rxjs.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
 
   @ViewChild('popupModal') popupModal;
+  private subscription: Subscription;
+  loggedIn = false;
   systemSettings = SystemSettings;
   navbarItems = [
     { 
@@ -63,32 +67,42 @@ export class NavComponent implements OnInit {
     }
   ]
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, 
+    private authService: AuthService,
+    private rxjsService: RxjsService) { }
 
   ngOnInit() {
-   if(this.authService.isAuthenticated()){
+    this.subscription = this.rxjsService.changeLoggedInSubject.subscribe((loggedIn) => {
+      this.loggedIn = loggedIn;
+    });
 
-   }
-   else{
-
-   }
+    if(this.authService.isAuthenticated()){
+      this.loggedIn = true;
+    }
+    else{
+      this.loggedIn = false;
+    }
   }
 
-  openModal(component: Component, data: any){
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  openModal(component: Component, data: any) {
     this.popupModal.openModal(component, data);
   }
 
-  logoClicked(){
+  logoClicked() {
     this.router.navigate(["/"]);
   }
   
-  loginClicked(){
-    if(this.authService.isAuthenticated()){
-      this.authService.logout();
-    }
-    else{
-          this.router.navigate(["/login"]);
-    }
+  loginClicked() {
+    this.router.navigate(["/login"]);
   }
 
+  logoutClicked() {
+    this.authService.logout();
+    this.router.navigate(["/login"]);
+    this.rxjsService.changeLoggedIn(false);
+  }
 }
