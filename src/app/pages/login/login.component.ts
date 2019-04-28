@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user-service/user.service';
 import { ResponseStatus } from '../../common/enum';
+import { RxjsService } from '../../services/rxjs-service/rxjs.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, 
     private router: Router, 
     private _Activatedroute: ActivatedRoute,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private rxjsService: RxjsService) { }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
@@ -39,6 +41,7 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         this.authService.setSession(data);
         this.router.navigate([this.returnUrl ? this.returnUrl : "/"]);
+        this.rxjsService.changeLoggedIn(true);
       }, err => {
 
         if (err.status == ResponseStatus.NotFound) {
