@@ -1,0 +1,12 @@
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\bin\Debug\netcoreapp2.0\CodathonTeam2API.deps.json
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\bin\Debug\netcoreapp2.0\CodathonTeam2API.runtimeconfig.json
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\bin\Debug\netcoreapp2.0\CodathonTeam2API.runtimeconfig.dev.json
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\bin\Debug\netcoreapp2.0\CodathonTeam2API.dll
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\bin\Debug\netcoreapp2.0\CodathonTeam2API.pdb
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\CodathonTeam2API.csprojAssemblyReference.cache
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\CodathonTeam2API.csproj.CoreCompileInputs.cache
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\CodathonTeam2API.AssemblyInfoInputs.cache
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\CodathonTeam2API.AssemblyInfo.cs
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\CodathonTeam2API.dll
+D:\Team2 ui\code-a-thon-2019\Backend\CodathonTeam2API\CodathonTeam2API\obj\Debug\netcoreapp2.0\CodathonTeam2API.pdb
