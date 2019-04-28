@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user-service/user.service';
+import { ResponseStatus } from '../../common/enum';
 
 @Component({
   selector: 'app-login',
@@ -12,31 +13,37 @@ export class LoginComponent implements OnInit {
 
   email: string = '';
   password: string = '';
+  returnUrl: string;
   remember: boolean = false;
 
   showInvalidLogin: boolean = false;
 
-  constructor(private apiService: ApiService, 
+  constructor(private userService: UserService, 
     private router: Router, 
     private _Activatedroute: ActivatedRoute,
     private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+    }
+
     this.email = this._Activatedroute.snapshot.queryParams['email'];
     this.password = this._Activatedroute.snapshot.queryParams['pwd'];
+    this.returnUrl = this._Activatedroute.snapshot.queryParams['returnUrl'];
   }
 
   tryLogin() {
     this.showInvalidLogin = false;
-    this.apiService.post('auth','login', {email: this.email.trim(), password: this.password.trim()})
-    .subscribe(data => {
-      this.authService.setSession(data);
-      this.router.navigate(["/"]);
-    }, err => {
+    this.userService.login(this.email.trim(), this.password.trim())
+      .subscribe(data => {
+        this.authService.setSession(data);
+        this.router.navigate([this.returnUrl ? this.returnUrl : "/"]);
+      }, err => {
 
-      if (err.status == 401) {
-        this.showInvalidLogin = true;
-      }
+        if (err.status == ResponseStatus.NotFound) {
+          this.showInvalidLogin = true;
+        }
     });
   }
 

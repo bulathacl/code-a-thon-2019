@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-register',
@@ -16,24 +18,27 @@ export class RegisterComponent implements OnInit {
   confirmpwd: string = "";
   showRegError: boolean = false;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private userService: UserService, 
+    private router: Router, 
+    private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+    }
   }
 
   register() {
     this.showRegError = false;
-    var regModel = {
-      name: this.name,
-      email: this.email,
-      mobile: this.mobile,
-      password: this.password
+    var user: User = {
+      Name: this.name,
+      Email: this.email,
+      Mobile: this.mobile,
     }
 
-    this.apiService.post('auth', 'insertuser', regModel).subscribe(data => {
+    this.userService.register(user, this.password).subscribe(data => {
       this.router.navigate(["/login"],{ queryParams: { email: this.email, pwd: this.password } })
     }, err => {
-      debugger;
       this.showRegError = false;
       });
   }

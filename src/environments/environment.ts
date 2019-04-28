@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  appName: "Team2"
+  appName: "Team2",
+  expiration: 36000
 };
 
 /*

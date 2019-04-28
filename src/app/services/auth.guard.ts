@@ -19,16 +19,16 @@ export class AuthGuard implements CanActivate {
 }
 
 export interface CanComponentDeactivate {
-    canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
+  
+@Injectable()
+export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+
+  constructor() { }
+
+  canDeactivate() {
+    return true;
   }
-  
-  @Injectable()
-  export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
-  
-    constructor() { }
-  
-    canDeactivate() {
-      return true;
-    }
-  }
+}
   

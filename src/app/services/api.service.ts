@@ -9,8 +9,9 @@ export class ApiService {
   apiUrl: string;
 
   constructor(private client: HttpClient) { 
-      this.apiUrl = 'https://localhost:44313/api';
-    }
+    this.apiUrl = 'https://localhost:44313/api';
+    localStorage
+  }
 
   public get(controller: string, action: string):any{
     var reqDetails = this.getRequestInfo(controller, action);
