@@ -66,7 +66,7 @@ export class NavComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-   if(this.authService.isLoggedIn()){
+   if(this.authService.isAuthenticated()){
 
    }
    else{
@@ -83,7 +83,7 @@ export class NavComponent implements OnInit {
   }
   
   loginClicked(){
-    if(this.authService.isLoggedIn()){
+    if(this.authService.isAuthenticated()){
       this.authService.logout();
     }
     else{

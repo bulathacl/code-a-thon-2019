@@ -1,54 +1,157 @@
 import { Injectable } from '@angular/core';
-import * as moment from "moment";
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+// import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { AppSettingsService } from './app-settings.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
-    constructor() { }
+  static authDataKey = 'GeveoRecruitAuthData';
+  private msAuthDefaultNonce = '678910';
 
-    setSession(authData: any){
-        const expiresAt = moment().add(authData.expiration,'second');
+  constructor(private appSettingsService: AppSettingsService) { }
 
-        localStorage.setItem('id_token', authData.token);
-        localStorage.setItem('user_id', authData.userId);
-        localStorage.setItem('username', authData.username);
-        localStorage.setItem('user_mobile', authData.userMobile);
-        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+  isAuthenticated() {
+    const id_token = localStorage.getItem('id_token');
+    if (id_token) { return true; }
+    return false;
+  }
+
+  isExpired() {
+    const currentTime = new Date().getTime() / 1000;
+    const exp = parseInt(localStorage.getItem('expiration'), 10);
+
+    if (currentTime > exp) {
+      return true;
     }
-    
-    logout() {
-        localStorage.removeItem("id_token");
-        localStorage.removeItem("user_id");
-        localStorage.removeItem("expires_at");
-        localStorage.removeItem("user_mobile");
-        localStorage.removeItem("username");
-    }
+    return false;
+  }
 
-    getLoggedInUserId(){
-        return localStorage.getItem("user_id");
-    }
+  getAuthData(): AuthData {
+    const authData = null; // JSON.parse(Cookie.get(AuthService.authDataKey));
+    return authData;
+  }
 
-    getLoggedInUsername(){
-        return localStorage.getItem("username");
-    }
+  authorize(returnUrl: string) {
 
-    getLoggedInuserMobile(){
-        return localStorage.getItem("user_mobile");
-    }
+    const appSettings = null; // this.appSettingsService.getSettings();
 
-    public isLoggedIn() {
-        return (localStorage.getItem("id_token") != null && localStorage.getItem("id_token") != undefined)
-    }
+    // temp fix
+    const msOAuth2AuthorizeEndpoint = 'https://login.microsoftonline.com/2dc5556c-805e-4168-9b18-91a81ce717f9/oauth2/v2.0/authorize';
+    const msAppClientId = '5c71813c-195c-4297-9ce7-ea4a9550abe6';
+    const msAuthRedirectUrl = 'https://geveoteam2ui.azurewebsites.net'; // 'http://localhost:4200';
 
-    isLoggedOut() {
-        return !this.isLoggedIn();
-    }
+    const url = msOAuth2AuthorizeEndpoint + '?'
+      + 'client_id=' + msAppClientId + '&'
+      + 'response_type=id_token&'
+      + 'redirect_uri=' + encodeURIComponent(msAuthRedirectUrl) + '&'
+      + 'scope=openid email profile&'
+      + 'response_mode=fragment&'
+      + 'state=' + returnUrl + '&'
+      + 'nonce=' + this.msAuthDefaultNonce;
 
-    getExpiration() {
-        const expiration = localStorage.getItem("expires_at");
-        const expiresAt = JSON.parse(expiration);
-        return moment(expiresAt);
-    }    
+    window.location.href = url;
+  }
+
+  logout() {
+    localStorage.removeItem('id_token');
+  }
+
+  setAuthData(id_token: string) {
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('expiration');
+
+    localStorage.setItem('id_token', id_token);
+
+    const jwtPayload = id_token.split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtPayload);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+
+    localStorage.setItem('name', decodedJwtData.name);
+    localStorage.setItem('email', decodedJwtData.email);
+    localStorage.setItem('expiration', decodedJwtData.exp);
+  }
+
+  setRole(role: string) {
+    localStorage.setItem('role', role);
+  }
+
+  getRole(): string {
+    return localStorage.getItem('role');
+  }
+
+  isAdmin(): boolean {
+    const isAdmin = this.getRole() === 'admin' ? true : false;
+    return isAdmin;
+  }
+
+  setSession(data){
+
+  }
+
 }
+
+export interface AuthData {
+  firstName: string;
+  lastName: string;
+  userName: string;
+}
+
+
+
+// import { Injectable } from '@angular/core';
+// import * as moment from "moment";
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class AuthService {
+
+//     constructor() { }
+
+//     setSession(authData: any){
+//         const expiresAt = moment().add(authData.expiration,'second');
+
+//         localStorage.setItem('id_token', authData.token);
+//         localStorage.setItem('user_id', authData.userId);
+//         localStorage.setItem('username', authData.username);
+//         localStorage.setItem('user_mobile', authData.userMobile);
+//         localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+//   }
+//     logout() {
+//         localStorage.removeItem("id_token");
+//         localStorage.removeItem("user_id");
+//         localStorage.removeItem("expires_at");
+//         localStorage.removeItem("user_mobile");
+//         localStorage.removeItem("username");
+//     }
+
+//     getLoggedInUserId(){
+//         return localStorage.getItem("user_id");
+//     }
+
+//     getLoggedInUsername(){
+//         return localStorage.getItem("username");
+//     }
+
+//     getLoggedInuserMobile(){
+//         return localStorage.getItem("user_mobile");
+//     }
+
+//     public isLoggedIn() {
+//         return (localStorage.getItem("id_token") != null && localStorage.getItem("id_token") != undefined)
+//     }
+
+//     isLoggedOut() {
+//         return !this.isLoggedIn();
+//     }
+
+//     getExpiration() {
+//         const expiration = localStorage.getItem("expires_at");
+//         const expiresAt = JSON.parse(expiration);
+//         return moment(expiresAt);
+//     }
+// }

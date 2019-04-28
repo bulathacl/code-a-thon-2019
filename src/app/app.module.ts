@@ -12,11 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { CanDeactivateGuard, AuthGuard } from './services/auth.guard';
+import {  AuthGuard, CanDeactivateGuard } from './services/auth.guard';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { PopupModalComponent } from './common/popup-modal/popup-modal.component';
 import { TestComponentComponent } from './components/test-component/test-component.component';
+import { AppSettingsService } from './services/app-settings.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { TestComponentComponent } from './components/test-component/test-compone
     Ng2ImgMaxModule,
     EditorModule
   ],
-  providers: [ApiService, AuthGuard, CanDeactivateGuard],
+  providers: [ApiService, AuthGuard, CanDeactivateGuard, AppSettingsService, AuthService],
   bootstrap: [AppComponent],
   entryComponents: [TestComponentComponent]
 })
