@@ -9,7 +9,7 @@ export class ApiService {
   apiUrl: string;
 
   constructor(private client: HttpClient) { 
-    this.apiUrl = 'https://localhost:44313/api';
+    this.apiUrl = 'https://team2-p77f5g-api.azurewebsites.net/api/v1';
     localStorage
   }
 
@@ -47,8 +47,7 @@ export class ApiService {
     let optionsTmp = {
       headers: httpHeaders,
       params: {},
-      body: {},
-	  withCredentials: true
+      body: {}
     };
 
     return {url: urlTmp, options: optionsTmp}

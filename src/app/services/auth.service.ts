@@ -38,12 +38,13 @@ export class AuthService {
     const appSettings = null; // this.appSettingsService.getSettings();
 
     // temp fix
-    const msOAuth2AuthorizeEndpoint = 'https://login.microsoftonline.com/2dc5556c-805e-4168-9b18-91a81ce717f9/oauth2/v2.0/authorize';
-    const msAppClientId = '5c71813c-195c-4297-9ce7-ea4a9550abe6';
+    const msOAuth2AuthorizeEndpoint = 'https://login.microsoftonline.com/geveo.com/oauth2/authorize';
+    const msAppClientId = '292f12fc-993c-47c3-9d6a-f3aa2034f127';
     const msAuthRedirectUrl = 'https://geveoteam2ui.azurewebsites.net'; // 'http://localhost:4200';
 
     const url = msOAuth2AuthorizeEndpoint + '?'
       + 'client_id=' + msAppClientId + '&'
+      + 'grant_type=implicit&'
       + 'response_type=id_token&'
       + 'redirect_uri=' + encodeURIComponent(msAuthRedirectUrl) + '&'
       + 'scope=openid email profile&'

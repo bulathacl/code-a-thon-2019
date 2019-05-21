@@ -30,4 +30,8 @@ export class UserService {
   register(user: User, password: string) {
     return this.apiService.post(ApiPaths.auth.controller, ApiPaths.auth.action.insertuser, { user: user, password: password });
   }
+
+  getUser() {
+    return this.apiService.get(ApiPaths.user.controller, ApiPaths.user.action.me);
+  }
 }

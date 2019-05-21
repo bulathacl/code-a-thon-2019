@@ -12,5 +12,11 @@ export const ApiPaths = {
             login: 'login',
             insertuser: 'insertuser'
         }
+    },
+    user: {
+        controller: 'users',
+        action: {
+            me: 'me'
+        }
     }
 }

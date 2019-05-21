@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { UserService } from '../../services/user-service/user.service';
 import { Router } from '@angular/router';
 import { RxjsService } from '../../services/rxjs-service/rxjs.service';
 import { Subscription } from 'rxjs';
-import { LocalStorageService } from 'src/app/services/local-storage-service/local-storage.service';
+import { LocalStorageService } from '../../services/local-storage-service/local-storage.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   data: any;
   counter: any;
+  currentUser: User;
 
-  constructor(private apiService: ApiService, 
+  constructor(private userService: UserService, 
     private router: Router, 
     private rxjsService: RxjsService,
     private localStorageService: LocalStorageService) { }
@@ -37,8 +39,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getCounter() {
     this.localStorageService.getItem('counter').subscribe((data) => {
-      console.log(data)
+      console.log(data);
       this.counter = data;
+    });
+  }
+
+  getUser() {
+    this.userService.getUser().subscribe((data) => {
+      this.currentUser = new User();
+      this.currentUser.Email = data.currentUser.emailAddress;
+      this.currentUser.Name = data.currentUser.firstName + " " + data.currentUser.lastName;
     });
   }
 }
