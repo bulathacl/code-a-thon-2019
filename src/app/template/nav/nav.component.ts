@@ -103,7 +103,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   logoutClicked() {
     this.authService.logout();
-    //this.router.navigate(["/login"]);
     this.rxjsService.changeLoggedIn(false);
+    this.router.navigate(["/"]);
   }
 }
