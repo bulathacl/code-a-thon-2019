@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
 
     if (this.authService.isAuthenticated()) {
       if (this.authService.isExpired()) {
-        this.authService.authorize(state.url);
+        //this.authService.authorize(state.url);
         return false;
       } else {
         return true;

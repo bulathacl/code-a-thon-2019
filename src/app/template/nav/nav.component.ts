@@ -76,7 +76,7 @@ export class NavComponent implements OnInit, OnDestroy {
       this.loggedIn = loggedIn;
     });
 
-    if(this.authService.isAuthenticated()){
+    if(this.authService.isAuthenticated() && !this.authService.isExpired()){
       this.loggedIn = true;
     }
     else{

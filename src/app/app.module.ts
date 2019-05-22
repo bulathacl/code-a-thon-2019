@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 import { AppComponent } from './app.component';
 import { NavComponent } from './template/nav/nav.component';
 import { HomeComponent } from './pages/home/home.component';
-
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './services/api.service';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import {  AuthGuard, CanDeactivateGuard } from './services/auth.guard';
-import { Ng2ImgMaxModule } from 'ng2-img-max';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PopupModalComponent } from './common/popup-modal/popup-modal.component';
 import { TestComponentComponent } from './components/test-component/test-component.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+
+import { ApiService } from './services/api.service';
+import { AuthGuard, CanDeactivateGuard } from './services/auth.guard';
 import { AppSettingsService } from './services/app-settings.service';
 import { AuthService } from './services/auth.service';
 
@@ -28,7 +29,8 @@ import { AuthService } from './services/auth.service';
     LoginComponent,
     RegisterComponent,
     PopupModalComponent,
-    TestComponentComponent
+    TestComponentComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

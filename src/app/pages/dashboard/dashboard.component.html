@@ -1,0 +1,9 @@
+Home component data is : {{ data }} <br>
+Counter is : {{ counter }} <br>
+<div *ngIf="currentUser">
+    User is : <br>
+    &nbsp;&nbsp; Name : {{ currentUser.Name }} <br>
+    &nbsp;&nbsp; Email : {{ currentUser.Email }}
+</div>
+<button class="btn btn-default" (click)="getCounter()">Get Counter</button>
+<button class="btn btn-default" (click)="getUser()">Get User</button>
