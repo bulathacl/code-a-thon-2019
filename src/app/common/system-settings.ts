@@ -18,5 +18,18 @@ export const ApiPaths = {
         action: {
             me: 'me'
         }
+    },
+    application: {
+        controller: 'applications',
+        action: {
+            getAllApplications: '',
+            getWorkFlowsByAppId: '{applicationId}/workflows'
+        }
+    },
+    contract: {
+        controller: 'contracts',
+        action: {
+            getAllContracts: ''
+        }
     }
 }

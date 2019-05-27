@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiPaths, SystemSettings } from '../../common/system-settings';
+import { ApiPaths } from '../../common/system-settings';
 import { ApiService } from '../api.service';
 import { User } from '../../models/user';
 import { AuthService } from '../auth.service';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

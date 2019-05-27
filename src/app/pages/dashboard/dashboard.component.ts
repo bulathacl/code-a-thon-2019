@@ -5,6 +5,8 @@ import { RxjsService } from '../../services/rxjs-service/rxjs.service';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage-service/local-storage.service';
 import { User } from '../../models/user';
+import { ApplicationService } from '../../services/application-service/application.service';
+import { ContractService } from '../../services/contract-service/contract.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +19,11 @@ export class DashboardComponent implements OnInit {
   data: any;
   counter: any;
   currentUser: User;
+  applications: any[] = [];
 
-  constructor(private userService: UserService, 
+  constructor(private userService: UserService,
+    private applicationService: ApplicationService,
+    private contractService: ContractService,
     private router: Router, 
     private rxjsService: RxjsService,
     private localStorageService: LocalStorageService) { }
@@ -52,4 +57,27 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getApplications() {
+    this.applicationService.getAllApplications().subscribe((data) => {
+      if(data.applications && data.applications.length > 0) {
+        this.applications = data.applications;
+      }
+    });
+  }
+
+  getContracts(workflow) {
+    this.contractService.getAllContractsByWorkflowId(workflow.id).subscribe((data) => {
+      if(data.contracts && data.contracts.length > 0) {
+        workflow['contracts'] = data.contracts;
+      }
+    });
+  }
+
+  getWorkflows(application) {
+    this.applicationService.getWorkflowsByAppId(application.id).subscribe((data) => {
+      if(data.workflows && data.workflows.length > 0) {
+        application['workflows'] = data.workflows;
+      }
+    });
+  }
 }

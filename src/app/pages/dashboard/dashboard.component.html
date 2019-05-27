@@ -1,9 +1,32 @@
+<button class="btn btn-default" (click)="getCounter()">Get Counter</button>&nbsp;
+<button class="btn btn-default" (click)="getUser()">Get User</button>&nbsp;
+<button class="btn btn-default" (click)="getApplications()">Get Applications</button><br><br>
 Home component data is : {{ data }} <br>
 Counter is : {{ counter }} <br>
 <div *ngIf="currentUser">
     User is : <br>
     &nbsp;&nbsp; Name : {{ currentUser.Name }} <br>
     &nbsp;&nbsp; Email : {{ currentUser.Email }}
+</div><br>
+<div *ngIf="applications.length > 0">
+    Applications : <br>
+    <div *ngFor="let application of applications">
+        &nbsp;&nbsp; <a>App Name : {{ application.name }} </a><br>
+        &nbsp;&nbsp; <a>App Description : {{ application.description }} </a><br><br>
+        &nbsp;&nbsp; <button class="btn btn-default" (click)="getWorkflows(application)">Get Workflows</button>
+        <div *ngIf="application.workflows && application.workflows.length > 0">
+            &nbsp;&nbsp;Workflows : <br>
+            <div *ngFor="let workflow of application.workflows">
+                &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow Name : {{ workflow.name }} </a><br>
+                &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow Description : {{ workflow.description }} </a><br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-default" (click)="getContracts(workflow)">Get Contracts</button>
+                <div *ngIf="workflow.contracts && workflow.contracts.length > 0">
+                    &nbsp;&nbsp;&nbsp;&nbsp;Contracts : <br>
+                    <div *ngFor="let contract of workflow.contracts">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Contract ID : {{ contract.contractCodeId }} </a>
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
+    </div><br>
 </div>
-<button class="btn btn-default" (click)="getCounter()">Get Counter</button>
-<button class="btn btn-default" (click)="getUser()">Get User</button>

@@ -18,7 +18,11 @@ export class ApiService {
     return this.client.get(reqDetails.url, reqDetails.options);
   }
 
-  public getByParams(controller: string, action: string, params: any):any{
+  public getByParams(controller: string, action: string, params: any, urlParams: any):any{
+    
+    for (const property in urlParams) {
+      action = action.replace('{' + property + '}', urlParams[property]);
+    }
     
     var reqDetails = this.getRequestInfo(controller, action);
 
@@ -38,7 +42,7 @@ export class ApiService {
 
   private getRequestInfo(controller: string, action: string){
 
-    let urlTmp = this.apiUrl + '/' + controller + '/' + action;
+    let urlTmp = this.apiUrl + '/' + controller + (action != '' ? ('/' + action) : '');
     const idToken = localStorage.getItem("id_token");
 
     let httpHeaders = new HttpHeaders();
