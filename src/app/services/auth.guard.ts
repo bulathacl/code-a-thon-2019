@@ -9,16 +9,12 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (this.authService.isAuthenticated()) {
-      if (this.authService.isExpired()) {
-        //this.authService.authorize(state.url);
-        return false;
-      } else {
-        return true;
-      }
+    if (this.authService.isAuthenticated() && !this.authService.isExpired()) {
+      return true;
     } else {
       // not logged in so redirect to login page with the return url
       // this.authService.authorize(state.url);
+      this.router.navigate(['']);
       return false;
     }
   }
