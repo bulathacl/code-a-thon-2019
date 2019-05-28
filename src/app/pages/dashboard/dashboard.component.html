@@ -1,6 +1,5 @@
 <button class="btn btn-default" (click)="getCounter()">Get Counter</button>&nbsp;
-<button class="btn btn-default" (click)="getUser()">Get User</button>&nbsp;
-<button class="btn btn-default" (click)="getApplications()">Get Applications</button><br><br>
+<button class="btn btn-default" (click)="getUser()">Get User</button><br><br>
 Home component data is : {{ data }} <br>
 Counter is : {{ counter }} <br>
 <div *ngIf="currentUser">
@@ -8,24 +7,39 @@ Counter is : {{ counter }} <br>
     &nbsp;&nbsp; Name : {{ currentUser.Name }} <br>
     &nbsp;&nbsp; Email : {{ currentUser.Email }}
 </div><br>
-<div *ngIf="applications.length > 0">
-    Applications : <br>
+<button class="btn btn-default" (click)="getApplications()">Get Applications {{ isEmpty(applications) ? '+' : '-' }}</button><br><br>
+<div *ngIf="!isEmpty(applications)">
+    <a>Applications : </a><br>
     <div *ngFor="let application of applications">
         &nbsp;&nbsp; <a>App Name : {{ application.name }} </a><br>
         &nbsp;&nbsp; <a>App Description : {{ application.description }} </a><br><br>
-        &nbsp;&nbsp; <button class="btn btn-default" (click)="getWorkflows(application)">Get Workflows</button>
-        <div *ngIf="application.workflows && application.workflows.length > 0">
-            &nbsp;&nbsp;Workflows : <br>
+        &nbsp;&nbsp; <button class="btn btn-default" (click)="getWorkflows(application)">Get Workflows {{ isEmpty(application.workflows) ? '+' : '-' }}</button>
+        <div *ngIf="!isEmpty(application.workflows)">
+            &nbsp;&nbsp; <a>Workflows : </a><br>
             <div *ngFor="let workflow of application.workflows">
                 &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow Name : {{ workflow.name }} </a><br>
                 &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow Description : {{ workflow.description }} </a><br><br>
-                &nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-default" (click)="getContracts(workflow)">Get Contracts</button>
-                <div *ngIf="workflow.contracts && workflow.contracts.length > 0">
-                    &nbsp;&nbsp;&nbsp;&nbsp;Contracts : <br>
+                &nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-default" (click)="getContracts(workflow)">Get Contracts {{ isEmpty(workflow.contracts) ? '+' : '-' }}</button>
+                <div *ngIf="!isEmpty(workflow.contracts)">
+                    &nbsp;&nbsp;&nbsp;&nbsp; <a>Contracts : </a><br>
                     <div *ngFor="let contract of workflow.contracts">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Contract ID : {{ contract.contractCodeId }} </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Contract ID : {{ contract.contractCodeId }} </a><br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-default" (click)="getActions(contract)">Get Actions {{ isEmpty(contract.actions) ? '+' : '-' }}</button>
+                        <div *ngIf="!isEmpty(contract.actions)">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Actions : </a><br>
+                            <div *ngFor="let action of contract.actions">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Action Name : {{ action.name }} </a><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Action Description : {{ action.description }} </a><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameters : </a><br>
+                                <div *ngFor="let parameter of action.parameters">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter Name : {{ parameter.name }} </a><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter Description : {{ parameter.description }} </a><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter Type : {{ parameter.type.name }} </a><br>
+                                </div><br><br>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div><br><br>
             </div>
         </div><br><br>
     </div><br>

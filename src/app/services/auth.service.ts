@@ -40,7 +40,7 @@ export class AuthService {
     // temp fix
     const msOAuth2AuthorizeEndpoint = 'https://login.microsoftonline.com/geveo.com/oauth2/authorize';
     const msAppClientId = '292f12fc-993c-47c3-9d6a-f3aa2034f127';
-    const msAuthRedirectUrl = 'https://geveoteam2ui.azurewebsites.net'; // 'http://localhost:4200';
+    const msAuthRedirectUrl = 'http://localhost:4200'; // 'https://geveoteam2ui.azurewebsites.net';
 
     const url = msOAuth2AuthorizeEndpoint + '?'
       + 'client_id=' + msAppClientId + '&'

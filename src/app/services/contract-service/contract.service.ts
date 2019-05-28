@@ -12,4 +12,8 @@ export class ContractService {
   getAllContractsByWorkflowId(workflowId) {
     return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.getAllContracts, { workflowId: workflowId }, {});
   }
+
+  getAllActionsByContractId(contractId) {
+    return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.getActionsByContractId, {}, { contractId: contractId });
+  }
 }

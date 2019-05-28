@@ -29,7 +29,8 @@ export const ApiPaths = {
     contract: {
         controller: 'contracts',
         action: {
-            getAllContracts: ''
+            getAllContracts: '',
+            getActionsByContractId: '{contractId}/actions'
         }
     }
 }
