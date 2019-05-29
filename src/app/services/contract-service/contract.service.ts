@@ -16,4 +16,12 @@ export class ContractService {
   getAllActionsByContractId(contractId) {
     return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.getActionsByContractId, {}, { contractId: contractId });
   }
+
+  postActions(contractId, actionId, parameters) {
+    let data = {
+      workflowFunctionID: actionId,
+      workflowActionParameters: parameters
+    };
+    return this.apiService.postByParams(ApiPaths.contract.controller, ApiPaths.contract.action.postActions, {}, { contractId: contractId }, data);
+  }
 }

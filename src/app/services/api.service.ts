@@ -40,6 +40,23 @@ export class ApiService {
     return this.client.post(reqDetails.url, body, reqDetails.options);
   }
 
+  public postByParams(controller: string, action: string, params: any, urlParams: any, body: any):any{
+    
+    for (const property in urlParams) {
+      action = action.replace('{' + property + '}', urlParams[property]);
+    }
+    
+    var reqDetails = this.getRequestInfo(controller, action);
+
+    let queryParams = new HttpParams();
+    for (const property in params) {
+      queryParams = queryParams.set(property, params[property]);
+    }
+    reqDetails.options.params = queryParams;
+
+    return this.client.post(reqDetails.url, body, reqDetails.options);
+  }
+
   private getRequestInfo(controller: string, action: string){
 
     let urlTmp = this.apiUrl + '/' + controller + (action != '' ? ('/' + action) : '');

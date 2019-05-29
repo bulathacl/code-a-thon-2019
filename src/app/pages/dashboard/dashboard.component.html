@@ -7,16 +7,18 @@ Counter is : {{ counter }} <br>
     &nbsp;&nbsp; Name : {{ currentUser.Name }} <br>
     &nbsp;&nbsp; Email : {{ currentUser.Email }}
 </div><br>
-<button class="btn btn-default" (click)="getApplications()">Get Applications {{ isEmpty(applications) ? '+' : '-' }}</button><br><br>
+<button class="btn btn-default" (click)="getApplications()">Get Applications {{ isEmpty(applications) ? '+' : '-' }}</button>
 <div *ngIf="!isEmpty(applications)">
     <a>Applications : </a><br>
     <div *ngFor="let application of applications">
+        &nbsp;&nbsp; <a>App ID : {{ application.id }} </a><br>
         &nbsp;&nbsp; <a>App Name : {{ application.name }} </a><br>
         &nbsp;&nbsp; <a>App Description : {{ application.description }} </a><br><br>
         &nbsp;&nbsp; <button class="btn btn-default" (click)="getWorkflows(application)">Get Workflows {{ isEmpty(application.workflows) ? '+' : '-' }}</button>
         <div *ngIf="!isEmpty(application.workflows)">
             &nbsp;&nbsp; <a>Workflows : </a><br>
             <div *ngFor="let workflow of application.workflows">
+                &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow ID : {{ workflow.id }} </a><br>
                 &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow Name : {{ workflow.name }} </a><br>
                 &nbsp;&nbsp;&nbsp;&nbsp; <a>Workflow Description : {{ workflow.description }} </a><br><br>
                 &nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-default" (click)="getContracts(workflow)">Get Contracts {{ isEmpty(workflow.contracts) ? '+' : '-' }}</button>
@@ -28,18 +30,21 @@ Counter is : {{ counter }} <br>
                         <div *ngIf="!isEmpty(contract.actions)">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Actions : </a><br>
                             <div *ngFor="let action of contract.actions">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Action ID : {{ action.id }} </a><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Action Name : {{ action.name }} </a><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Action Description : {{ action.description }} </a><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameters : </a><br>
                                 <div *ngFor="let parameter of action.parameters">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter ID : {{ parameter.id }} </a><br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter Name : {{ parameter.name }} </a><br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter Description : {{ parameter.description }} </a><br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>Parameter Type : {{ parameter.type.name }} </a><br>
-                                </div><br><br>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-default" (click)="takeActions(action, contract)">{{ action.name }}</button>
                             </div>
-                        </div>
+                        </div><br><br>
                     </div>
-                </div><br><br>
+                </div>
             </div>
         </div><br><br>
     </div><br>

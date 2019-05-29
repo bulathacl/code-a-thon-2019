@@ -1,0 +1,7 @@
+<form [formGroup]="form">
+  <div *ngFor="let parameter of parameters" class="form-group">
+    <label for="{{ parameter.name }}">{{ parameter.name }}</label>
+    <input class="form-control" aria-describedby="emailHelp" placeholder="{{ parameter.name }}" formControlName="{{ parameter.name }}">
+    <small class="form-text text-muted">{{ parameter.description }}</small>
+  </div>
+</form>

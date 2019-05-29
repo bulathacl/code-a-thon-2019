@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user-service/user.service';
 import { RxjsService } from '../../services/rxjs-service/rxjs.service';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,7 @@ import { LocalStorageService } from '../../services/local-storage-service/local-
 import { User } from '../../models/user';
 import { ApplicationService } from '../../services/application-service/application.service';
 import { ContractService } from '../../services/contract-service/contract.service';
+import { ContractActionFormComponent } from '../../components/contract-action-form/contract-action-form.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ import { ContractService } from '../../services/contract-service/contract.servic
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild('popupModal') popupModal;
   private subscription: Subscription;
   data: any;
   counter: any;
@@ -106,5 +108,14 @@ export class DashboardComponent implements OnInit {
 
   isEmpty(array) {
     return !(array && array.length > 0)
+  }
+
+  takeActions(action, contract) {
+    this.rxjsService.openModal(ContractActionFormComponent, {
+      header: action.name,
+      confirmation: true,
+      action: action,
+      contract: contract
+    });
   }
 }

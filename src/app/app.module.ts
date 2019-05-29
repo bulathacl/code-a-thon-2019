@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './template/nav/nav.component';
@@ -20,6 +21,7 @@ import { ApiService } from './services/api.service';
 import { AuthGuard, CanDeactivateGuard } from './services/auth.guard';
 import { AppSettingsService } from './services/app-settings.service';
 import { AuthService } from './services/auth.service';
+import { ContractActionFormComponent } from './components/contract-action-form/contract-action-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { AuthService } from './services/auth.service';
     RegisterComponent,
     PopupModalComponent,
     TestComponentComponent,
-    DashboardComponent
+    DashboardComponent,
+    ContractActionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +42,14 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     HttpModule,
     Ng2ImgMaxModule,
-    EditorModule
+    EditorModule,
+    ReactiveFormsModule
   ],
   providers: [ApiService, AuthGuard, CanDeactivateGuard, AppSettingsService, AuthService],
   bootstrap: [AppComponent],
-  entryComponents: [TestComponentComponent]
+  entryComponents: [
+    TestComponentComponent,
+    ContractActionFormComponent
+  ]
 })
 export class AppModule { }

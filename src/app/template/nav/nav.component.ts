@@ -14,7 +14,8 @@ import { Subscription } from 'rxjs';
 export class NavComponent implements OnInit, OnDestroy {
 
   @ViewChild('popupModal') popupModal;
-  private subscription: Subscription;
+  private loggedInSubscription: Subscription;
+  private popupModalSubscription: Subscription;
   loggedIn = false;
   systemSettings = SystemSettings;
   navbarItems = [
@@ -72,8 +73,12 @@ export class NavComponent implements OnInit, OnDestroy {
     private rxjsService: RxjsService) { }
 
   ngOnInit() {
-    this.subscription = this.rxjsService.changeLoggedInSubject.subscribe((loggedIn) => {
+    this.loggedInSubscription = this.rxjsService.changeLoggedInSubject.subscribe((loggedIn) => {
       this.loggedIn = loggedIn;
+    });
+
+    this.popupModalSubscription = this.rxjsService.changePopupModalSubject.subscribe((data) => {
+      this.openModal(data.component, data.data);
     });
 
     if(this.authService.isAuthenticated() && !this.authService.isExpired()){
@@ -85,7 +90,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.loggedInSubscription.unsubscribe();
   }
 
   openModal(component: Component, data: any) {
