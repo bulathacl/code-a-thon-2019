@@ -1,7 +1,10 @@
 <form [formGroup]="form">
   <div *ngFor="let parameter of parameters" class="form-group">
-    <label for="{{ parameter.name }}">{{ parameter.name }}</label>
-    <input class="form-control" aria-describedby="emailHelp" placeholder="{{ parameter.name }}" formControlName="{{ parameter.name }}">
+    <label for="{{ parameter.name }}">{{ parameter.displayName }}</label>
+    <input *ngIf="!parameter.data" class="form-control" aria-describedby="emailHelp" placeholder="{{ parameter.displayName }}" formControlName="{{ parameter.name }}">
+    <select *ngIf="parameter.data" class="form-control" aria-describedby="emailHelp" formControlName="{{ parameter.name }}">
+      <option *ngFor="let item of parameter.data" value="{{ item.id }}">{{ item.name }}</option>
+    </select>
     <small class="form-text text-muted">{{ parameter.description }}</small>
   </div>
 </form>

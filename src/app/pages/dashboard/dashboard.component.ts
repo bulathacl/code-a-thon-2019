@@ -110,12 +110,54 @@ export class DashboardComponent implements OnInit {
     return !(array && array.length > 0)
   }
 
-  takeActions(action, contract) {
-    this.rxjsService.openModal(ContractActionFormComponent, {
-      header: action.name,
-      confirmation: true,
-      action: action,
-      contract: contract
-    });
+  takeActions(action, contract, application) {
+    Promise.all([
+      this.applicationService.getAllApplicationById(application.id).subscribe((data) => {
+        let applicationRoles;
+        if(data) {
+          applicationRoles = data.applicationRoles
+        }
+        if(applicationRoles) {
+          action.parameters.forEach(parameter => {
+            this.getUsersByRoleName(application.id, applicationRoles, parameter.type.name, (data) => {
+              parameter.data = data;
+            });
+          });
+        }        
+      }),
+      this.rxjsService.openModal(ContractActionFormComponent, {
+        header: action.displayName,
+        confirmation: true,
+        action: action,
+        contract: contract
+      })
+    ]);  
+  }
+
+  getUsersByRoleName(appId, applicationRoles, name: string, callback) {
+    let role = applicationRoles.find((role) => role.name == name);
+    if(!role) {
+      callback(undefined);
+      return;
+    }
+    this.applicationService.getRoleAssignmentsByAppId(appId).subscribe((data) => {
+      if (data) {
+        let users = data.roleAssignments.filter((roleAssignment) => roleAssignment.applicationRoleId == role.id);
+        if (users) {
+          callback(users.map((roleAssignment) => {
+            return {
+              id: roleAssignment.user.userID,
+              name: roleAssignment.user.firstName + " " + roleAssignment.user.lastName,
+              identifier: roleAssignment.user.emailAddress
+            }
+          }));
+          return;
+        }
+        else {
+          callback([]);
+          return;
+        }
+      }
+    });    
   }
 }

@@ -22,16 +22,17 @@ export const ApiPaths = {
     application: {
         controller: 'applications',
         action: {
-            getAllApplications: '',
-            getWorkFlowsByAppId: '{applicationId}/workflows'
+            applications: '',
+            application: '{applicationId}',
+            workflows: '{applicationId}/workflows',
+            rolesAssignments: '{applicationId}/roleAssignments'
         }
     },
     contract: {
         controller: 'contracts',
         action: {
-            getAllContracts: '',
-            getActionsByContractId: '{contractId}/actions',
-            postActions: '{contractId}/actions'
+            contracts: '',
+            actions: '{contractId}/actions'
         }
     }
 }

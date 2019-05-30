@@ -10,11 +10,11 @@ export class ContractService {
   constructor(private apiService: ApiService) { }
 
   getAllContractsByWorkflowId(workflowId) {
-    return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.getAllContracts, { workflowId: workflowId }, {});
+    return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.contracts, { workflowId: workflowId }, {});
   }
 
   getAllActionsByContractId(contractId) {
-    return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.getActionsByContractId, {}, { contractId: contractId });
+    return this.apiService.getByParams(ApiPaths.contract.controller, ApiPaths.contract.action.actions, {}, { contractId: contractId });
   }
 
   postActions(contractId, actionId, parameters) {
@@ -22,6 +22,6 @@ export class ContractService {
       workflowFunctionID: actionId,
       workflowActionParameters: parameters
     };
-    return this.apiService.postByParams(ApiPaths.contract.controller, ApiPaths.contract.action.postActions, {}, { contractId: contractId }, data);
+    return this.apiService.postByParams(ApiPaths.contract.controller, ApiPaths.contract.action.actions, {}, { contractId: contractId }, data);
   }
 }

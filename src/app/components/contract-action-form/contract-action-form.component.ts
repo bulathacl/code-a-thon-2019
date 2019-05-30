@@ -14,12 +14,14 @@ export class ContractActionFormComponent implements OnInit {
     form: FormGroup;
     action: any;
     contract: any;
+    application: any;
   
     constructor(private rxjsService: RxjsService,
       private contractService: ContractService) {     
     }
   
     ngOnInit() {
+      this.application = this.data.application;
       this.contract = this.data.contract;
       this.action = this.data.action;
       this.parameters = this.action.parameters;
@@ -47,6 +49,6 @@ export class ContractActionFormComponent implements OnInit {
     changeData() {
       this.rxjsService.changeHomeData(new Date);
     }
-  
+
   }
   
