@@ -10,11 +10,19 @@ export class ApplicationService {
   constructor(private apiService: ApiService) { }
 
   getAllApplications() {
-    return this.apiService.get(ApiPaths.application.controller, ApiPaths.application.action.getAllApplications);
+    return this.apiService.get(ApiPaths.application.controller, ApiPaths.application.action.applications);
+  }
+
+  getAllApplicationById(appId) {
+    return this.apiService.getByParams(ApiPaths.application.controller, ApiPaths.application.action.application, {}, { applicationId: appId });
   }
 
   getWorkflowsByAppId(appId) {
-    return this.apiService.getByParams(ApiPaths.application.controller, ApiPaths.application.action.getWorkFlowsByAppId, {}, { applicationId: appId });
+    return this.apiService.getByParams(ApiPaths.application.controller, ApiPaths.application.action.workflows, {}, { applicationId: appId });
+  }
+
+  getRoleAssignmentsByAppId(appId) {
+    return this.apiService.getByParams(ApiPaths.application.controller, ApiPaths.application.action.rolesAssignments, {}, { applicationId: appId });
   }
 
   getWrapperData(){
