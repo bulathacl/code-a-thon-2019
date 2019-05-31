@@ -118,4 +118,11 @@ export class DashboardComponent implements OnInit {
       contract: contract
     });
   }
+
+  wrapperButtonClicked(){
+    this.applicationService.getWrapperData().subscribe((data) => {
+      debugger;
+      }
+    });
+  }
 }

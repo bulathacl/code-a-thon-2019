@@ -16,4 +16,8 @@ export class ApplicationService {
   getWorkflowsByAppId(appId) {
     return this.apiService.getByParams(ApiPaths.application.controller, ApiPaths.application.action.getWorkFlowsByAppId, {}, { applicationId: appId });
   }
+
+  getWrapperData(){
+    return this.apiService.get("qa", "Get");
+  }
 }
